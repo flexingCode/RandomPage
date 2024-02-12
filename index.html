@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container-center {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .static-button {
+        position: relative;
+    }
+
+    #dinamic-button {
+        position: absolute;
+        left: 55%;
+    }
+
+    .btn-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .btn {
+        width: 100px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        color: white;
+    }
+
+    .btn-red {
+        background-color: red;
+    }
+
+    .btn-green {
+        background-color: green;
+    }
+
+    .image-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<body>
+    <div id="container-center">
+        <h1>Vamos a salir el 14 :3?</h1>
+        <div class="btn-container">
+            <div class="static-button btn btn-green" style="margin-left: -100%;">
+                SI
+            </div>
+            <div id="dinamic-button" class="btn btn-red">
+                NO
+            </div>
+        </div>
+        <div class="image-container">
+        </div>
+
+        <audio src="floppy.ogg" autoplay="true" loop></audio>
+    </div>
+</body>
+<script>
+    let dinamicButton = document.getElementById('dinamic-button');
+    //add event listener to the dinamic button
+    dinamicButton.addEventListener('mouseenter', function () {
+        console.log('hover');
+        //generate random x and y positions
+        let x = Math.random() * (window.innerWidth - dinamicButton.offsetWidth);
+        let y = Math.random() * (window.innerHeight - dinamicButton.offsetHeight);
+
+        let x2 = Math.random() * (window.innerWidth - dinamicButton.offsetWidth);
+        let y2 = Math.random() * (window.innerHeight - dinamicButton.offsetHeight);
+        //set the new positions
+        dinamicButton.style.left = x + 'px';
+        dinamicButton.style.top = y + 'px';
+        // create a new image element
+        let image = document.createElement('img');
+        image.src = 'giphy.gif';
+        image.alt = 'Random Image';
+        image.width = 100;
+        image.height = 100;
+        image.style.position = 'absolute';
+        image.style.zIndex = '-1';
+        image.style.left = x2 + 'px';
+        image.style.top = y2 + 'px';
+        // append the image to the container
+        document.querySelector('.image-container').appendChild(image);
+        let audioElement = document.querySelector('audio');
+        audioElement.play();
+    });
+
+</script>
+
+</html>
